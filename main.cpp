@@ -1,34 +1,25 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 
 
-vector<int> getDivisors(int number) {
-  vector<int> divisors = {};
+int getDivisorSum(int number) {
+  int divisorSum = 1;
 
-  for (int i = 1; i < number; i++) {
+  // We can skip 1
+  for (int i = 2; i < number; i++) {
     if (number % i == 0) {
-      divisors.push_back(i);
+      divisorSum += i;
     }
   }
 
-  return divisors;
-}
-
-int getVectorSum(vector<int> numbers) {
-  int sum = 0;
-
-  for (int i = 0; i < numbers.size(); i++) {
-    sum += numbers[i];
-  }
-
-  return sum;
+  return divisorSum;
 }
 
 bool checkPerfect(int number) {
-  vector <int> divisors = getDivisors(number);
-  int divisorSum = getVectorSum(divisors);
+  int divisorSum = getDivisorSum(number);
 
+  // A number is perfect if it is equal to
+  // the sum of it's divisors.
   if (number == divisorSum) {
     return true;
   }
@@ -37,8 +28,6 @@ bool checkPerfect(int number) {
 }
 
 int main() {
-  cout << "starting ..." << endl;
-  
   for (int i = 0; ; i++) {
     bool isPerfect = checkPerfect(i);
     if (isPerfect) {
